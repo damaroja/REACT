@@ -1,0 +1,51 @@
+
+
+¿Que ventajas posee useMemo en react?
+
+
+useMemo es un hook en React que se utiliza para memoizar valores computados, lo que significa que guarda en caché el resultado de una función de cálculo y lo devuelve si las dependencias no han cambiado desde la última renderización. Algunas de las ventajas de usar useMemo en React incluyen:
+
+    Optimización de rendimiento: useMemo evita que se vuelva a calcular un valor en cada renderizado a menos que las dependencias hayan cambiado, lo que puede mejorar el rendimiento de la aplicación al evitar cálculos innecesarios.
+
+    Reducción de la carga de trabajo del CPU: Al memoizar valores computados, se evita la necesidad de recalcular esos valores en cada renderizado, lo que puede reducir la carga de trabajo del CPU y mejorar la capacidad de respuesta de la aplicación, especialmente en componentes que se vuelven a renderizar con frecuencia.
+
+    Evita renders innecesarios: Al memoizar valores computados con useMemo, se garantiza que los componentes no se vuelvan a renderizar si los valores no han cambiado, incluso si otros estados o propiedades en el componente han cambiado. Esto puede reducir la cantidad de renders innecesarios y optimizar el rendimiento de la aplicación.
+
+    Facilita la gestión de dependencias: useMemo permite especificar las dependencias de los valores memoizados de manera explícita, lo que facilita la gestión de cuándo deben actualizarse esos valores. Esto puede hacer que el código sea más claro y menos propenso a errores.
+
+En resumen, useMemo es una herramienta útil para optimizar el rendimiento de las aplicaciones React al memoizar valores computados y evitar cálculos innecesarios durante el renderizado.
+  
+Osea, que se puede usar useMemo en lugar de funciones en react
+
+
+No exactamente. useMemo no reemplaza las funciones en React, sino que se utiliza para memoizar los resultados de funciones computacionales dentro de componentes funcionales de React. Cuando tienes una función que realiza un cálculo costoso y ese cálculo no necesita ser recalculado en cada renderizado del componente, puedes utilizar useMemo para memoizar el resultado de esa función.
+
+Por ejemplo, supongamos que tienes una función calcularResultado que realiza un cálculo costoso:
+
+
+
+function calcularResultado(parametro) {
+    // Cálculo costoso
+    return resultado;
+}
+
+En lugar de llamar directamente a esta función dentro de tu componente funcional, puedes utilizar useMemo para memoizar el resultado:
+
+
+
+const resultadoMemoizado = useMemo(() => calcularResultado(parametro), [parametro]);
+
+En este ejemplo, calcularResultado es una función normal que se utiliza dentro de useMemo para calcular un valor memoizado. El segundo argumento de useMemo es un array de dependencias que determina cuándo se debe recalcular el valor memoizado. Si alguna de las dependencias cambia entre renderizaciones, calcularResultado se volverá a ejecutar y se actualizará el valor memoizado.
+
+Por lo tanto, useMemo es una herramienta que se utiliza junto con funciones en React para optimizar el rendimiento al memoizar valores computados, no para reemplazar funciones.
+  
+Osea, solo las funciones que puedan generar mucha carga de proceso
+
+
+Exactamente. useMemo se utiliza principalmente para memoizar el resultado de funciones que realicen operaciones costosas en términos de procesamiento o consumo de recursos, como cálculos intensivos, llamadas a API, o transformaciones de datos complejas.
+
+Cuando una función realiza operaciones que consumen muchos recursos, ejecutarla en cada renderización de un componente puede afectar negativamente el rendimiento de la aplicación. En esos casos, utilizar useMemo para memoizar el resultado de la función puede ayudar a evitar cálculos innecesarios y mejorar el rendimiento.
+
+Sin embargo, no todas las funciones dentro de un componente necesitan ser memoizadas. Solo aquellas que realmente causen un impacto significativo en el rendimiento deben considerarse para memoización con useMemo. Las funciones más simples que no realizan cálculos costosos generalmente no necesitan ser memoizadas.
+
+Por lo tanto, useMemo es una herramienta que se utiliza de manera selectiva para optimizar el rendimiento de componentes React al memoizar el resultado de funciones que generan una carga significativa de proceso.
